@@ -1,0 +1,9 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(open:*)",
+      "Bash(node --check /Users/elgiz/PycharmProjects/rr/script.js)",
+      "Bash(ls:*)"
+    ]
+  }
+}

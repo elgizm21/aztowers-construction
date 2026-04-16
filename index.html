@@ -1,0 +1,602 @@
+<!DOCTYPE html>
+<html lang="az">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>AZTOWERS Construction</title>
+    <meta name="description" content="Tikinti və təmir şirkəti üçün interaktiv korporativ sayt və canlı qiymət kalkulyatoru." />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link href="https://fonts.googleapis.com/css2?family=Manrope:wght@400;500;600;700;800&family=Space+Grotesk:wght@500;700&display=swap" rel="stylesheet" />
+    <link rel="stylesheet" href="styles.css" />
+    <style>
+      /* GSAP kart hover: border glow effekti */
+      .info-card,
+      .package-card,
+      .feature-card {
+        will-change: transform;
+        transition: box-shadow 0.28s ease;
+      }
+      .card-hovered {
+        box-shadow: 0 0 0 2px var(--accent), var(--shadow-lg) !important;
+      }
+      /* Aktiv nav link indicator */
+      .nav-links a { position: relative; overflow: hidden; }
+      .nav-links a::after {
+        content: '';
+        position: absolute;
+        bottom: 4px;
+        left: 50%;
+        transform: translateX(-50%) scaleX(0);
+        width: 16px;
+        height: 2px;
+        border-radius: 2px;
+        background: var(--accent);
+        transition: transform 300ms cubic-bezier(0.34, 1.56, 0.64, 1);
+      }
+      .nav-links a.nav-active::after,
+      .nav-links a:hover::after {
+        transform: translateX(-50%) scaleX(1);
+      }
+    </style>
+  </head>
+  <body>
+    <div class="scroll-bar" id="scrollBar"></div>
+
+    <div class="float-cta" id="floatCta">
+      <div class="float-cta-inner">
+        <div class="float-cta-info">
+          <span class="float-cta-label">Canlı smeta</span>
+          <strong class="float-cta-price" id="floatPrice">—</strong>
+        </div>
+        <a href="#calculator" class="button button-primary float-cta-btn">Kalkulyatora bax</a>
+      </div>
+    </div>
+
+    <div class="toast" id="toast" role="status" aria-live="polite">
+      <span id="toastText"></span>
+    </div>
+
+    <header class="site-header">
+      <div class="container">
+        <nav class="nav">
+          <a class="brand" href="#top">
+            <img class="brand-logo" src="assets/aztowers-logo.png" alt="AZ Towers Construction" />
+          </a>
+          <div class="nav-links">
+            <a href="#services">Xidmətlər</a>
+            <a href="#calculator">Kalkulyator</a>
+            <a href="#projects">Paketlər</a>
+            <a href="#experience">Təcrübə</a>
+            <a href="#contact">Əlaqə</a>
+          </div>
+          <a class="button button-primary nav-cta" href="#calculator">Hesabla</a>
+        </nav>
+      </div>
+    </header>
+
+    <div class="quick-nav">
+      <a href="#calculator">Qiymət al</a>
+      <a href="#projects">Paketlər</a>
+      <a href="#contact">Əlaqə</a>
+    </div>
+
+    <main id="top">
+      <section class="hero">
+        <div class="hero-blob"></div>
+        <div class="container hero-grid">
+          <div class="hero-copy">
+            <p class="eyebrow">Tikinti, təmir və ağıllı həllər</p>
+            <div class="hero-badge">AZTOWERS loqosu və rəng sistemi ilə uyğunlaşdırılıb</div>
+            <h1>İstifadəçi üçün rahat, layihə üçün dəqiq tikinti platforması</h1>
+            <p class="hero-text">
+              Müştəri ilk baxışda xidmətləri anlayır, kalkulyatorda seçimlərini edir və
+              təxmini büdcəni saniyələr içində görür. Biz isə onu real icraya hazırlayırıq.
+            </p>
+            <div class="hero-actions">
+              <a class="button button-primary" href="#calculator">Qiyməti hesabla</a>
+              <a class="button button-secondary" href="#experience">Niyə biz?</a>
+            </div>
+            <div class="trust-strip">
+              <span>✓ Şəffaf smeta</span>
+              <span>✓ Mərhələli nəzarət</span>
+              <span>✓ Mobil uyğun</span>
+            </div>
+            <ul class="hero-metrics">
+              <li>
+                <strong class="count-num" data-target="120" data-suffix="+">0+</strong>
+                <span>Tamamlanmış layihə</span>
+              </li>
+              <li>
+                <strong class="count-num" data-target="8" data-suffix=" il">0 il</strong>
+                <span>Sahə təcrübəsi</span>
+              </li>
+              <li>
+                <strong class="count-num" data-target="24" data-suffix=" saat">0 saat</strong>
+                <span>İlkin geri dönüş</span>
+              </li>
+            </ul>
+          </div>
+
+          <div class="hero-panel">
+            <div class="hero-card primary-surface">
+              <div class="hero-card-top">
+                <span class="status-dot"></span>
+                <span>Canlı layihə idarəetməsi</span>
+              </div>
+              <h2>Bir şirkət, bütün mərhələlər</h2>
+              <p>
+                Eskizdən son təhvilə qədər qərarvermə daha rahat olsun deyə hər mərhələ
+                vizual, ölçülə bilən və aydın təqdim olunur.
+              </p>
+              <div class="timeline">
+                <div>
+                  <span>01</span>
+                  <p>Obyekt baxışı və prioritetlərin çıxarılması</p>
+                </div>
+                <div>
+                  <span>02</span>
+                  <p>Büdcəyə uyğun material və iş planı</p>
+                </div>
+                <div>
+                  <span>03</span>
+                  <p>İcra, foto hesabat və mərhələli təhvil</p>
+                </div>
+              </div>
+            </div>
+
+            <div class="floating-gallery">
+              <article class="floating-card card-left">
+                <div class="floating-card-media" style="background-image: url('assets/style-reference.png');"></div>
+                <div class="floating-card-copy">
+                  <span>01</span>
+                  <strong>Premium facade direction</strong>
+                </div>
+              </article>
+              <article class="floating-card card-center">
+                <div class="floating-card-media" style="background-image: url('assets/style-reference.png');"></div>
+                <div class="floating-card-copy">
+                  <span>02</span>
+                  <strong>Studio-like interaction</strong>
+                </div>
+              </article>
+              <article class="floating-card card-right">
+                <div class="floating-card-media" style="background-image: url('assets/aztowers-logo.png');"></div>
+                <div class="floating-card-copy">
+                  <span>03</span>
+                  <strong>Brand-led presentation</strong>
+                </div>
+              </article>
+            </div>
+
+            <div class="hero-mini-grid">
+              <article class="mini-card">
+                <span class="mini-label">Bu gün ən çox soruşulan</span>
+                <strong>3 otaqlı mənzil təmiri</strong>
+                <p>85-120 m² aralığında premium paketə keçid yüksəkdir.</p>
+              </article>
+              <article class="mini-card quick-calc-card">
+                <span class="mini-label">Sürətli smeta</span>
+                <div class="qc-type-row">
+                  <button class="qc-btn active" type="button" data-qc-type="renovation">Təmir</button>
+                  <button class="qc-btn" type="button" data-qc-type="construction">Tikinti</button>
+                </div>
+                <div class="qc-slider-row">
+                  <span id="qcAreaLabel">120 m²</span>
+                  <input type="range" id="qcArea" min="20" max="400" value="120" />
+                </div>
+                <strong class="qc-price" id="qcPrice">₼ 38,400</strong>
+                <a href="#calculator" class="qc-link">Tam hesabla →</a>
+              </article>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="services" id="services">
+        <div class="container section-head split-head">
+          <div>
+            <p class="eyebrow">Xidmət istiqamətləri</p>
+            <h2>Tikintidən son interyer detalına qədər hər şey bir yerdə</h2>
+          </div>
+          <div class="service-switch" aria-label="Xidmət filtri">
+            <button class="chip active" type="button" data-service-filter="all">Hamısı</button>
+            <button class="chip" type="button" data-service-filter="construction">Tikinti</button>
+            <button class="chip" type="button" data-service-filter="renovation">Təmir</button>
+            <button class="chip" type="button" data-service-filter="design">Dizayn</button>
+          </div>
+        </div>
+
+        <div class="container card-grid">
+          <article class="info-card reveal-item" data-reveal data-service-type="construction">
+            <div class="service-icon">🏗️</div>
+            <h3>Yeni ev tikintisi</h3>
+            <p>Bünövrə, karkas, dam, fasad və əsas konstruktiv mərhələlərin tam icrası.</p>
+            <a href="#calculator">Tikinti smetasına keç</a>
+          </article>
+          <article class="info-card reveal-item" data-reveal data-service-type="renovation">
+            <div class="service-icon">🔨</div>
+            <h3>Mənzil təmiri</h3>
+            <p>Söküntü, alçı, boya, kafel, döşəmə və qapı işləri bir plan üzrə idarə olunur.</p>
+            <a href="#calculator">Təmir smetasına keç</a>
+          </article>
+          <article class="info-card reveal-item" data-reveal data-service-type="design">
+            <div class="service-icon">✏️</div>
+            <h3>Dizayn və layihələndirmə</h3>
+            <p>Planlama, 3D vizual, material seçimi və iş sıralamasının əvvəldən qurulması.</p>
+            <a href="#projects">Paketlərə bax</a>
+          </article>
+          <article class="info-card reveal-item" data-reveal data-service-type="construction">
+            <div class="service-icon">⚡</div>
+            <h3>Mühəndis sistemləri</h3>
+            <p>Elektrik, su, istilik, havalandırma və smart home inteqrasiyası.</p>
+            <a href="#experience">Üstünlükləri gör</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="calculator-section" id="calculator">
+        <div class="container calculator-layout">
+          <div class="calculator-copy">
+            <p class="eyebrow">İnteraktiv smeta</p>
+            <h2>Müştəri üçün daha aydın və addım-addım qiymət təcrübəsi</h2>
+            <p>
+              Seçimlər vizual bloklara ayrılıb ki, istifadəçi səhifədə itməmiş olsun.
+              Kalkulyator canlı işləyir və sağ paneldə tövsiyə də verir.
+            </p>
+            <div class="preset-bar" aria-label="Hazır ssenarilər">
+              <button class="preset-chip active" type="button" data-preset="family-home">Ailə evi</button>
+              <button class="preset-chip" type="button" data-preset="apartment-refresh">Mənzil təmiri</button>
+              <button class="preset-chip" type="button" data-preset="office-fitout">Ofis yenilənməsi</button>
+            </div>
+            <div class="journey-steps">
+              <div class="journey-step active" data-step-indicator="1">
+                <span>1</span>
+                <strong>Layihə tipi</strong>
+              </div>
+              <div class="journey-step" data-step-indicator="2">
+                <span>2</span>
+                <strong>Sahə və keyfiyyət</strong>
+              </div>
+              <div class="journey-step" data-step-indicator="3">
+                <span>3</span>
+                <strong>Əlavələr və nəticə</strong>
+              </div>
+            </div>
+          </div>
+
+          <div class="calculator-card">
+            <form id="price-form" class="price-form">
+              <section class="form-section" data-step="1">
+                <div class="form-section-head">
+                  <h3>İş növünü seçin</h3>
+                  <p>Tikinti və təmir üçün bazalar fərqlidir.</p>
+                </div>
+                <div class="option-grid two-col">
+                  <label class="option-card selected">
+                    <input type="radio" name="projectType" value="construction" checked />
+                    <span class="option-title">Yeni tikinti</span>
+                    <span class="option-copy">Tam konstruksiya və mühəndis planı</span>
+                  </label>
+                  <label class="option-card">
+                    <input type="radio" name="projectType" value="renovation" />
+                    <span class="option-title">Təmir</span>
+                    <span class="option-copy">Mənzil, ev, ofis və obyekt yenilənməsi</span>
+                  </label>
+                </div>
+                <div class="field">
+                  <label for="propertyType">Obyekt növü</label>
+                  <select id="propertyType" name="propertyType">
+                    <option value="apartment">Mənzil</option>
+                    <option value="house">Fərdi ev / villa</option>
+                    <option value="office">Ofis</option>
+                    <option value="commercial">Kommersiya obyekti</option>
+                  </select>
+                </div>
+              </section>
+
+              <section class="form-section" data-step="2">
+                <div class="form-section-head">
+                  <h3>Sahə və material səviyyəsi</h3>
+                  <p>Sürgü və rəqəm eyni anda yenilənir.</p>
+                </div>
+                <div class="field">
+                  <label for="areaRange">Sahə: <strong id="areaOutput">120 m²</strong></label>
+                  <input id="areaRange" name="areaRange" type="range" min="20" max="2000" value="120" />
+                </div>
+                <div class="field">
+                  <label for="area">Dəqiq sahə (m²)</label>
+                  <input id="area" name="area" type="number" min="20" max="2000" value="120" />
+                </div>
+                <div class="option-grid three-col">
+                  <label class="option-card selected compact">
+                    <input type="radio" name="quality" value="standard" checked />
+                    <span class="option-title">Standart</span>
+                    <span class="option-copy">Balanslı material seçimi</span>
+                  </label>
+                  <label class="option-card compact">
+                    <input type="radio" name="quality" value="premium" />
+                    <span class="option-title">Premium</span>
+                    <span class="option-copy">Daha uzunömürlü və estetik</span>
+                  </label>
+                  <label class="option-card compact">
+                    <input type="radio" name="quality" value="luxury" />
+                    <span class="option-title">Lüks</span>
+                    <span class="option-copy">Fərdi və yüksək segment</span>
+                  </label>
+                </div>
+                <div class="field">
+                  <label for="timeline">İcra sürəti</label>
+                  <select id="timeline" name="timeline">
+                    <option value="regular">Standart müddət</option>
+                    <option value="fast">Sürətləndirilmiş</option>
+                    <option value="phased">Mərhələli təhvil</option>
+                  </select>
+                </div>
+              </section>
+
+              <section class="form-section" data-step="3">
+                <div class="form-section-head">
+                  <h3>Əlavə işlər</h3>
+                  <p>Seçdikcə ümumi smeta avtomatik artır.</p>
+                </div>
+                <fieldset class="addons">
+                  <legend>Əlavə xidmətlər</legend>
+                  <label class="addon-row"><input type="checkbox" name="addons" value="design" /> Dizayn layihəsi <span class="addon-badge">+8%</span></label>
+                  <label class="addon-row"><input type="checkbox" name="addons" value="electrical" /> Tam elektrik işi <span class="addon-badge">+38₼/m²</span></label>
+                  <label class="addon-row"><input type="checkbox" name="addons" value="plumbing" /> Santexnika paketi <span class="addon-badge">+44₼/m²</span></label>
+                  <label class="addon-row"><input type="checkbox" name="addons" value="furniture" /> Mətbəx və built-in mebel <span class="addon-badge">+95₼/m²</span></label>
+                  <label class="addon-row"><input type="checkbox" name="addons" value="smart" /> Smart home sistemləri <span class="addon-badge">+70₼/m²</span></label>
+                </fieldset>
+              </section>
+            </form>
+
+            <aside class="result-panel">
+              <p class="result-label">Təxmini büdcə</p>
+              <p class="result-price" id="estimatedPrice">₼ 0</p>
+              <p class="result-note" id="resultSummary">Seçimlərinizə görə smeta hesablanır...</p>
+
+              <div class="insight-row">
+                <div>
+                  <span class="insight-label">Tövsiyə olunan paket</span>
+                  <strong id="recommendedPackage">—</strong>
+                </div>
+                <div>
+                  <span class="insight-label">Təxmini müddət</span>
+                  <strong id="estimatedDuration">—</strong>
+                </div>
+              </div>
+
+              <div class="cost-chart">
+                <svg class="donut-svg" viewBox="0 0 120 120" xmlns="http://www.w3.org/2000/svg">
+                  <circle class="donut-track" cx="60" cy="60" r="45"/>
+                  <circle class="donut-seg" id="segBase" cx="60" cy="60" r="45"/>
+                  <circle class="donut-seg" id="segQuality" cx="60" cy="60" r="45"/>
+                  <circle class="donut-seg" id="segTimeline" cx="60" cy="60" r="45"/>
+                  <circle class="donut-seg" id="segAddons" cx="60" cy="60" r="45"/>
+                </svg>
+                <div class="donut-legend">
+                  <span><em class="dot dot-base"></em>Baza işlər</span>
+                  <span><em class="dot dot-quality"></em>Keyfiyyət</span>
+                  <span><em class="dot dot-timeline"></em>Müddət</span>
+                  <span><em class="dot dot-addons"></em>Əlavələr</span>
+                </div>
+              </div>
+
+              <div class="result-breakdown" id="resultBreakdown"></div>
+
+              <div class="progress-card">
+                <div class="progress-copy">
+                  <span>Hazırlıq səviyyəsi</span>
+                  <strong id="projectReadiness">İlkin smeta hazırdır</strong>
+                </div>
+                <div class="progress-bar">
+                  <span id="readinessBar"></span>
+                </div>
+              </div>
+
+              <a class="button button-primary full-width" href="#contact">Bu smeta üzrə müraciət et</a>
+            </aside>
+          </div>
+        </div>
+      </section>
+
+      <section class="projects" id="projects">
+        <div class="container section-head">
+          <p class="eyebrow">Hazır həllər</p>
+          <h2>Müştərinin tez qərar verməsi üçün sadə paket arxitekturası</h2>
+        </div>
+        <div class="container package-grid">
+          <article class="package-card reveal-item" data-reveal>
+            <p class="package-name">Start</p>
+            <h3>Baza tikinti və təmir</h3>
+            <p>İşə sürətli başlamaq və əsas ehtiyacları qarşılamaq üçün.</p>
+            <ul class="pkg-features">
+              <li>Standart material seçimi</li>
+              <li>Əsas elektrik sistemi</li>
+              <li>Bünövrə və karkas işləri</li>
+              <li>3 aylıq zəmanət</li>
+            </ul>
+            <a href="#calculator" data-apply-preset="start" class="button button-secondary full-width pkg-btn">Qiymət hesabla</a>
+          </article>
+          <article class="package-card featured reveal-item" data-reveal>
+            <span class="pkg-badge">Ən Populyar</span>
+            <p class="package-name">Balance</p>
+            <h3>Ailə evi üçün ən balanslı seçim</h3>
+            <p>Material, mühəndis sistemləri və funksional interyer arasında doğru balans.</p>
+            <ul class="pkg-features">
+              <li>Premium material seçimi</li>
+              <li>Tam elektrik + santexnika</li>
+              <li>Dizayn layihəsi daxil</li>
+              <li>Mərhələli hesabat</li>
+              <li>6 aylıq zəmanət</li>
+            </ul>
+            <a href="#calculator" data-apply-preset="family-home" class="button button-primary full-width pkg-btn">Qiymət hesabla</a>
+          </article>
+          <article class="package-card reveal-item" data-reveal>
+            <p class="package-name">Signature</p>
+            <h3>Premium və fərdiləşdirilmiş həll</h3>
+            <p>Estetik, mebel və texnologiya tərəfi güclü olan layihələr üçün.</p>
+            <ul class="pkg-features">
+              <li>Lüks material seçimi</li>
+              <li>Smart home sistemləri</li>
+              <li>Built-in mebel daxil</li>
+              <li>Fərdi dizayn layihəsi</li>
+              <li>12 aylıq zəmanət</li>
+            </ul>
+            <a href="#calculator" data-apply-preset="signature" class="button button-secondary full-width pkg-btn">Qiymət hesabla</a>
+          </article>
+        </div>
+      </section>
+
+      <section class="experience" id="experience">
+        <div class="container experience-grid">
+          <div data-reveal>
+            <p class="eyebrow">İstifadəçi təcrübəsi</p>
+            <h2>Rahat naviqasiya, aydın mətn və qərara aparan bloklar</h2>
+            <p class="section-copy">
+              Bu səhifə elə qurulub ki, istifadəçi əvvəl xidmətləri dərk etsin, sonra smetanı
+              hesablaya bilsin və sonda rahat şəkildə əlaqəyə keçsin.
+            </p>
+          </div>
+          <div class="feature-stack">
+            <article class="feature-card" data-reveal>
+              <strong>⚡ Sürətli keçidlər</strong>
+              <p>Vacib bölmələrə yuxarı hissədən və üzən menyudan bir toxunuşla keçid.</p>
+            </article>
+            <article class="feature-card" data-reveal>
+              <strong>🃏 Vizual seçim kartları</strong>
+              <p>Radio və checkbox-lar daha aydın hiss olunsun deyə kart formatına salındı.</p>
+            </article>
+            <article class="feature-card" data-reveal>
+              <strong>📊 Canlı tövsiyələr</strong>
+              <p>Kalkulyator təkcə qiymət yox, paket, müddət və xərc strukturu da göstərir.</p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="process">
+        <div class="container process-grid">
+          <div data-reveal>
+            <p class="eyebrow">Necə işləyirik</p>
+            <h2>Şəffaf mərhələlər, aydın nəticə</h2>
+          </div>
+          <div class="steps">
+            <article class="reveal-item" data-reveal>
+              <span>1</span>
+              <div>
+                <h3>Baxış və ölçü</h3>
+                <p>Obyekt analiz olunur, risk və prioritetlər dəqiqləşdirilir.</p>
+              </div>
+            </article>
+            <article class="reveal-item" data-reveal>
+              <span>2</span>
+              <div>
+                <h3>Smeta və müqavilə</h3>
+                <p>İş həcmi, material səviyyəsi və icra qrafiki əvvəlcədən sabitlənir.</p>
+              </div>
+            </article>
+            <article class="reveal-item" data-reveal>
+              <span>3</span>
+              <div>
+                <h3>İcra və hesabat</h3>
+                <p>Mərhələli hesabat, nəzarət və təhvil prosesi ilə etibar yaradılır.</p>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <section class="faq">
+        <div class="container section-head" data-reveal>
+          <p class="eyebrow">Tez-tez verilən suallar</p>
+          <h2>İstifadəçinin ən çox verdiyi suallara birbaşa cavab</h2>
+        </div>
+        <div class="container faq-list">
+          <details open data-reveal>
+            <summary>
+              <span>Kalkulyatordakı qiymət yekun qiymətdirmi?</span>
+              <span class="faq-chevron">▾</span>
+            </summary>
+            <p>Bu ilkin smetadır. Dəqiq məbləğ obyektə baxış və texniki tapşırıqdan sonra formalaşır.</p>
+          </details>
+          <details data-reveal>
+            <summary>
+              <span>Qiymətə materiallar daxildirmi?</span>
+              <span class="faq-chevron">▾</span>
+            </summary>
+            <p>Seçilən paket və material səviyyəsinə görə baza hesablamasına material payı daxildir.</p>
+          </details>
+          <details data-reveal>
+            <summary>
+              <span>Layihə nə qədər müddətə başlayır?</span>
+              <span class="faq-chevron">▾</span>
+            </summary>
+            <p>Adətən ilkin baxışdan sonra 24 saat ərzində geri dönüş, 3-7 gün ərzində isə təklif hazırlanır.</p>
+          </details>
+          <details data-reveal>
+            <summary>
+              <span>Ödəniş necə həyata keçirilir?</span>
+              <span class="faq-chevron">▾</span>
+            </summary>
+            <p>Ödəniş mərhələli şəkildə həyata keçirilir: başlanğıcda, mərhələ tamamlandıqda və yekun təhvildə.</p>
+          </details>
+        </div>
+      </section>
+
+      <section class="contact" id="contact">
+        <div class="container contact-box">
+          <div class="contact-info-col">
+            <p class="eyebrow">Əlaqə</p>
+            <h2>Layihənizi bizimlə planlayaq</h2>
+            <p data-reveal>
+              Kalkulyator ilkin istiqamət verir. Dəqiq smeta üçün obyektə baxış, ölçü və
+              texniki ehtiyaclar əsasında fərdi təklif hazırlanır.
+            </p>
+            <div class="contact-cards">
+              <div data-reveal>
+                <span>📞 Telefon</span>
+                <strong>+994 50 555 22 11</strong>
+              </div>
+              <div data-reveal>
+                <span>✉️ E-poçt</span>
+                <strong>info@ustaline.az</strong>
+              </div>
+              <div data-reveal>
+                <span>🕐 İş saatı</span>
+                <strong>B.e. - Ş. 09:00 - 19:00</strong>
+              </div>
+            </div>
+          </div>
+          <form class="contact-form" id="contactForm" novalidate data-reveal>
+            <h3 class="contact-form-title">Müraciət göndər</h3>
+            <p class="contact-form-sub">Formu doldurun, 24 saat ərzində sizinlə əlaqə saxlayırıq.</p>
+            <div class="field">
+              <label for="cName">Ad Soyad</label>
+              <input id="cName" name="cName" type="text" placeholder="Adınız" required />
+            </div>
+            <div class="field">
+              <label for="cPhone">Telefon</label>
+              <input id="cPhone" name="cPhone" type="tel" placeholder="+994 50 000 00 00" required />
+            </div>
+            <div class="field">
+              <label for="cNote">Layihə haqqında qeyd (ixtiyari)</label>
+              <textarea id="cNote" name="cNote" rows="3" placeholder="Qısa məlumat..."></textarea>
+            </div>
+            <button type="submit" class="button button-primary full-width" id="contactSubmitBtn">Müraciət göndər</button>
+          </form>
+        </div>
+      </section>
+    </main>
+
+    <script src="script.js"></script>
+    <!-- GSAP + ScrollTrigger CDN -->
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js"></script>
+    <!-- animations.js (CSS-based scroll reveals + page transition overlay) -->
+    <script src="animations.js"></script>
+    <!-- GSAP animasiyalar -->
+    <script src="gsap-animations.js"></script>
+  </body>
+</html>

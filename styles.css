@@ -42,6 +42,7 @@ body {
     linear-gradient(320deg, rgba(255,255,255,0.07) 0 10%, transparent 10% 100%),
     linear-gradient(180deg, #8e9299 0%, #878c94 100%);
   min-height: 100vh;
+  overflow-x: hidden;
 }
 
 main {
@@ -51,6 +52,7 @@ main {
 img { max-width: 100%; display: block; }
 a { color: inherit; text-decoration: none; }
 button, input, select, textarea { font: inherit; }
+input, select, textarea { max-width: 100%; }
 h1, h2, h3 { line-height: 1.15; text-wrap: balance; }
 p { margin: 0; }
 
@@ -1881,42 +1883,167 @@ details[open] .faq-chevron { transform: rotate(180deg); }
 }
 
 @media (max-width: 760px) {
-  .nav { flex-direction: column; align-items: flex-start; gap: 10px; }
-  .nav-links { gap: 2px; }
+  body { padding-bottom: 78px; }
+
+  .site-header { top: 0; }
+
+  .nav {
+    flex-direction: column;
+    align-items: stretch;
+    gap: 10px;
+    padding: 10px 0 12px;
+  }
+
+  .brand {
+    max-width: 210px;
+  }
+
+  .nav-links {
+    width: 100%;
+    gap: 4px;
+    overflow-x: auto;
+    padding-bottom: 2px;
+    scrollbar-width: none;
+  }
+
+  .nav-links::-webkit-scrollbar { display: none; }
+
+  .nav-links a {
+    flex: 0 0 auto;
+    padding: 8px 11px;
+    font-size: 0.84rem;
+    white-space: nowrap;
+  }
+
   .nav-cta { display: none; }
 
-  .hero { padding: 50px 0 40px; }
+  .hero { padding: 28px 0 34px; }
   section { padding: 40px 0; }
 
-  .hero h1 { font-size: clamp(2.4rem, 9vw, 3.5rem); }
+  .hero-grid {
+    padding: 26px;
+    border-radius: 26px;
+    gap: 28px;
+  }
+
+  .hero h1 {
+    font-size: clamp(2.25rem, 11vw, 3.25rem);
+    line-height: 0.98;
+    max-width: 100%;
+  }
+
+  .hero-text {
+    font-size: 0.98rem;
+  }
+
+  .hero-actions .button {
+    width: 100%;
+  }
 
   .hero-mini-grid,
   .hero-metrics { grid-template-columns: 1fr; }
 
+  .floating-gallery {
+    gap: 12px;
+  }
+
+  .floating-card {
+    min-height: 150px;
+    --base-y: 0px;
+    --base-r: 0deg;
+    --hover-x: 0px;
+    --hover-y: 0px;
+    --hover-r: 0deg;
+    --card-scale: 1;
+  }
+
+  .hero-card,
+  .mini-card,
+  .quick-calc-card,
+  .package-card,
+  .feature-card,
+  .steps article {
+    border-radius: 22px;
+  }
+
   .quick-nav {
     right: 10px; left: 10px; bottom: 10px;
     grid-template-columns: repeat(3, 1fr);
+    gap: 6px;
   }
 
   .quick-nav a {
     text-align: center;
     padding: 10px 8px;
-    font-size: 0.84rem;
+    font-size: 0.8rem;
+    min-height: 42px;
+    display: grid;
+    place-items: center;
   }
 
   .preset-bar { display: grid; grid-template-columns: 1fr; }
+
+  .calculator-section {
+    padding: 42px 0;
+  }
+
+  .calculator-layout {
+    gap: 22px;
+  }
+
+  .calculator-copy h2,
+  .section-head h2,
+  .experience h2,
+  .process h2,
+  .contact h2 {
+    font-size: clamp(1.8rem, 8vw, 2.6rem);
+  }
+
+  .calculator-card {
+    border-radius: 24px;
+    gap: 12px;
+  }
 
   .price-form  { padding: 16px; }
   .result-panel { padding: 18px; }
   .form-section { padding: 16px; }
   .journey-step { padding: 12px 14px; }
 
+  .option-grid {
+    grid-template-columns: 1fr;
+  }
+
+  .addon-row {
+    align-items: flex-start;
+    min-height: 0;
+    padding: 13px 14px;
+  }
+
+  .addon-badge {
+    align-self: center;
+  }
+
+  .result-price {
+    font-size: clamp(2.1rem, 12vw, 3rem);
+    overflow-wrap: anywhere;
+  }
+
   .breakdown-item { grid-template-columns: 1fr; gap: 3px; }
   .breakdown-item span:last-child { text-align: left; }
 
   .float-cta {
     width: calc(100% - 28px);
-    bottom: 72px;
+    bottom: 66px;
+  }
+
+  .float-cta-inner {
+    justify-content: space-between;
+    gap: 8px;
+  }
+
+  .float-cta-btn {
+    padding: 0 12px !important;
+    font-size: 0.78rem !important;
   }
 
   .toast { width: calc(100% - 28px); }
@@ -1924,12 +2051,73 @@ details[open] .faq-chevron { transform: rotate(180deg); }
   .contact-form { padding: 22px; }
   .contact-box  { padding: 22px; }
 
+  .contact-cards div {
+    display: grid;
+    gap: 4px;
+    justify-content: stretch;
+  }
+
+  .contact-cards strong {
+    overflow-wrap: anywhere;
+  }
+
   .cost-chart { flex-direction: column; align-items: flex-start; }
   .donut-legend { flex-direction: row; flex-wrap: wrap; gap: 8px 16px; }
 }
 
 @media (max-width: 480px) {
-  .container { width: calc(100% - 28px); }
+  .container { width: calc(100% - 24px); }
+
+  .hero-grid {
+    padding: 20px;
+    border-radius: 22px;
+  }
+
+  .hero-badge {
+    width: 100%;
+    min-height: 0;
+    padding: 9px 12px;
+    border-radius: 14px;
+    line-height: 1.35;
+  }
+
+  .trust-strip span {
+    width: 100%;
+    text-align: center;
+  }
+
   .calculator-card { padding: 10px; }
+  .price-form { padding: 12px; }
+  .form-section { padding: 14px; }
   .option-card { padding: 14px; }
+
+  .button {
+    width: 100%;
+    white-space: normal;
+    min-height: 48px;
+    padding: 0 16px;
+  }
+
+  .quick-nav a {
+    font-size: 0.74rem;
+    padding: 8px 5px;
+  }
+
+  .float-cta-inner {
+    padding: 8px;
+  }
+
+  .float-cta-label {
+    font-size: 0.58rem;
+  }
+
+  .float-cta-price {
+    font-size: 0.88rem;
+  }
+
+  .contact-box,
+  .contact-form {
+    padding: 18px;
+    border-radius: 22px;
+  }
 }
